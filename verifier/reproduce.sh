@@ -27,7 +27,7 @@ case "$LEVEL" in
 esac
 sha256() { if command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" | cut -d' ' -f1; else shasum -a 256 "$1" | cut -d' ' -f1; fi; }
 
-make -s
+make -s ${CC:+CC="$CC"}      # honour CC from the environment (the Makefile default is clang)
 OUT="out_$LEVEL"
 mkdir -p "$OUT"
 echo "== colour --nmax $N --threads $THR"

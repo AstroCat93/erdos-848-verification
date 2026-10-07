@@ -29,7 +29,7 @@ for n in 100 500 1000 2000 3000; do
 done
 
 echo "== 3. verifier unit tests"
-make -s -C "$VER"
+make -s -C "$VER" CC="$CC"
 "$VER/test_sqf" 100000 10 > "$TMP/sqf.txt"; tail -1 "$TMP/sqf.txt"
 expect "TOTAL FAILURES: 0" "$TMP/sqf.txt"
 "$VER/test_v" 1e8 1e6 200000 10 > "$TMP/v.txt"; tail -1 "$TMP/v.txt"

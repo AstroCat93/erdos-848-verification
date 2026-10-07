@@ -1,5 +1,5 @@
 # SHA-256 of the Part B run artifacts (macOS arm64, 2026-10-07).  Only log_1e5.bin is in this repository;
-# the others (about 9 GB in total) are not, because of their size.  All of them can be regenerated with
+# the others (about 8.4 GB in total) are not, because of their size.  All of them can be regenerated with
 # ../reproduce.sh: colour is deterministic and independent of the thread count, so the move log for any NMAX is
 # a byte-exact prefix of log_2p32_full.bin (checked: log_1e5 < log_1e7 < log_1e8 < log_1e9 < log_2p32_full).
 #

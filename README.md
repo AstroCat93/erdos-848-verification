@@ -59,7 +59,9 @@ verifier/                   Part B (C with unsigned __int128, C11 atomics, pthre
   sqf.h                       squarefree certifier (trial division, Miller-Rabin, Pollard-Brent, cube-root fallback)
   vsieve.h                    sieve for V_N = {n <= N : n^2+1 not squarefree}
   checker.c                   independent replay/dump checker; shares no code with colour.c/sqf.h/vsieve.h
-  ref.h, vsieve2.h            the checker's own squarefree test and V sieve
+  ref.h, vsieve2.h            the checker's squarefree test and V sieve (ref.h is also compiled into colour.c,
+                                but only for its optional internal audits, never for its certificates)
+  common.h                    small shared utilities (timing, allocation, RNG); no squarefree or sieve logic
   test_sqf.c, test_v.c        unit tests of the certifier and of the two V sieves
   brute_cmp.c                 compares against an edge-sieve graph (no squarefree test) + exact clique induction
   bench_sqf.c                 certifier benchmark
@@ -81,8 +83,9 @@ notes/literature.md         literature and forum notes (as of 2026-10-07)
 Part B used 10 threads.
 
 **Requirements:** a C compiler with `unsigned __int128` and pthreads, `make`, and Python ≥ 3.9 with numpy
-(`pip install -r requirements.txt`). Only Apple clang on arm64 was tested. Elsewhere use `make CC=gcc`;
-`-march=native` is set in `verifier/Makefile`.
+(`pip install -r requirements.txt`). Only Apple clang on arm64 was tested. The Makefile defaults to `clang`;
+elsewhere set `CC` in the environment, e.g. `CC=gcc verifier/reproduce.sh quick` and `CC=gcc tests/run_tests.sh`
+(both scripts pass it on to `make`). `-march=native` is set in `verifier/Makefile`.
 
 Every command below was run on 2026-10-07 from a **fresh copy of this repository** (no binaries, no prior
 outputs), except `reproduce.sh 1e9`, `reproduce.sh full` and `verify_analytic.sh --full`. The runtimes are
@@ -221,8 +224,17 @@ Further checks recorded in the logs:
 
 ### Large artifacts not included
 
-The move logs and colouring dumps of the original runs total about 9 GB and are not in the repository.
-`reproduce.sh` regenerates them. Their SHA-256 (full list in `verifier/runs/SHA256SUMS.txt`):
+The move logs and colouring dumps of the original runs (the seven files in `verifier/runs/SHA256SUMS.txt`
+other than `log_1e5.bin` and `log_1e7.bin`) total about 8.4 GB and are not in the repository.
+`reproduce.sh` regenerates them, except the dump at N₁, which needs one extra command:
+
+```sh
+cd verifier && make -s && mkdir -p out_n1 && \
+  ./colour --nmax 42000000 --log out_n1/log.bin --dump-at 42000000 --dump-dir out_n1 > out_n1/colour.log && \
+  ./checker dump out_n1/colouring_42000000.bin && shasum -a 256 out_n1/colouring_42000000.bin
+```
+
+Their SHA-256 (full list in `verifier/runs/SHA256SUMS.txt`):
 
 | file | bytes | SHA-256 |
 |---|---|---|
