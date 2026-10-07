@@ -1,0 +1,24 @@
+# build products
+verifier/colour
+verifier/checker
+verifier/test_sqf
+verifier/test_v
+verifier/brute_cmp
+verifier/bench_sqf
+tests/clique_check
+audit/brute_piv
+*.o
+*.dSYM/
+
+# run outputs (large; see verifier/runs/SHA256SUMS.txt)
+verifier/out_*/
+verifier/runs/*.bin
+!verifier/runs/log_1e5.bin
+analytic/regrid/
+audit/data/bp100000.txt
+audit/data/bp400000.txt
+
+# python / OS
+__pycache__/
+*.pyc
+.DS_Store

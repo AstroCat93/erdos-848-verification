@@ -1,0 +1,11 @@
+edge sieve: N=100000 |V|=10511, loops present for 10511/10511 vertices, asymmetric entries=0 (4.6s)
+[all pairs] 55235305 pairs a<b in V_N, 25276045 edges; mismatches edge-sieve vs sqf_cert=0, vs ref_sf=0 (1.7s)
+[replay vs edge sieve] steps=10511 (|V|=10511), same-class pairs checked=12480, errors=0 => PASS: proper t(n)-colouring for every n <= N
+  clique check progress: n=7 (0s)
+  clique check progress: n=19057 (0s)
+  clique check progress: n=38068 (0s)
+  clique check progress: n=57082 (1s)
+  clique check progress: n=76120 (2s)
+  clique check progress: n=95132 (3s)
+[clique induction] for every vertex n <= 100000: earlier neighbourhood has no clique of size t(n) -> omega(G_n) <= t(n) for all n <= 100000; violations=0, B&B nodes=10511 (3.0s)
+BRUTE_CMP PASS

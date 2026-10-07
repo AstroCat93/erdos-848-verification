@@ -1,0 +1,2 @@
+independent V: 101638380 primes p=1 mod 4, |V_N|=451653474 (42.0s)
+REPLAY runs/log_2p32_full.bin: N=4294967295 records=517358696 steps(vertices)=451653474 moves=65705222 pairs_checked=536466170 bad_pairs=0 errors=0  => PASS (proper t(n)-colouring of G_n for every n <= N)  (2399.3s)

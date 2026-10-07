@@ -1,0 +1,49 @@
+colour: NMAX=100000000 threads=10 B1=4096 rho=4096x2 span=32768 CAP=7 MAXE=2 DMAX=4 KD={24,32,16,8,6} DPRE=2
+V sieve: 2880504 primes q=1 mod 4 used, |V_NMAX|=10515898, 0.1s
+AUDIT N=100000: PASS  classes=4000 (=t(N)) members=10511 (=|V_N|) maxclass=8 C18free=0 pairs_checked=10053 bad=0 (0.0s)
+   class size histogram (incl. c_k): 1:0 2:2280 3:1124 4:439 5:125 6:27 7:4 8:1
+AUDIT N=1000000: PASS  classes=40000 (=t(N)) members=105144 (=|V_N|) maxclass=8 C18free=0 pairs_checked=101010 bad=0 (0.0s)
+   class size histogram (incl. c_k): 1:0 2:22963 3:11040 4:4316 5:1322 6:295 7:58 8:6
+AUDIT N=10000000: PASS  classes=400000 (=t(N)) members=1051583 (=|V_N|) maxclass=8 C18free=0 pairs_checked=1010633 bad=0 (0.1s)
+   class size histogram (incl. c_k): 1:0 2:228991 3:111844 4:42350 5:13017 6:3096 7:608 8:94
+N=10000000 verified | t(N)=400000 |V_N|=1051583 (C7 400000, C18 400000, other 251583) | 0.9s (+0.9s, 11.54 M/s) | repairs C18=138069 out=0 | depth C18[261931 138069 0 0 0|ex 0] out[251578 5 0|ex 0] | maxclass=8 | certs yes=1347261 no=5298 UNCERTAIN=0 td2=3 | phaseB hit=2581659 miss=17213
+N=20000000 verified | t(N)=800000 |V_N|=2103229 (C7 800000, C18 800000, other 503229) | 1.4s (+0.6s, 17.59 M/s) | repairs C18=276140 out=3 | depth C18[523860 276140 0 0 0|ex 0] out[503214 15 0|ex 0] | maxclass=8 | certs yes=2689650 no=10608 UNCERTAIN=0 td2=142 | phaseB hit=5176666 miss=19111
+N=30000000 verified | t(N)=1200000 |V_N|=3154768 (C7 1200000, C18 1200000, other 754768) | 2.1s (+0.6s, 15.49 M/s) | repairs C18=414214 out=6 | depth C18[785786 414214 0 0 0|ex 0] out[754746 22 0|ex 0] | maxclass=8 | certs yes=4032069 no=15772 UNCERTAIN=0 td2=687 | phaseB hit=7773195 miss=20193
+N=40000000 verified | t(N)=1600000 |V_N|=4206383 (C7 1600000, C18 1600000, other 1006383) | 2.8s (+0.7s, 13.95 M/s) | repairs C18=552287 out=7 | depth C18[1047713 552287 0 0 0|ex 0] out[1006355 28 0|ex 0] | maxclass=8 | certs yes=5374263 no=21024 UNCERTAIN=0 td2=1979 | phaseB hit=10369735 miss=20971
+DUMP N=42000000 written to runs/colouring_42000000.bin
+AUDIT N=42000000: PASS  classes=1680000 (=t(N)) members=4416665 (=|V_N|) maxclass=8 C18free=0 pairs_checked=4243974 bad=0 (1.2s)
+   class size histogram (incl. c_k): 1:0 2:961459 3:469754 4:178775 5:54102 6:12938 7:2529 8:443
+AUDIT N=50000000: PASS  classes=2000000 (=t(N)) members=5257944 (=|V_N|) maxclass=8 C18free=0 pairs_checked=5052229 bad=0 (1.5s)
+   class size histogram (incl. c_k): 1:0 2:1144359 3:559643 4:212788 5:64212 6:15442 7:3015 8:541
+N=50000000 verified | t(N)=2000000 |V_N|=5257944 (C7 2000000, C18 2000000, other 1257944) | 6.5s (+3.7s, 2.67 M/s) | repairs C18=690350 out=8 | depth C18[1309650 690350 0 0 0|ex 0] out[1257913 31 0|ex 0] | maxclass=8 | certs yes=6716700 no=26114 UNCERTAIN=0 td2=4271 | phaseB hit=12967056 miss=21555
+CHECKPOINT saved: runs/ckpt_1e8.bin (next n=50000001, T=2000000)
+N=60000000 verified | t(N)=2400000 |V_N|=6309546 (C7 2400000, C18 2400000, other 1509546) | 7.5s (+1.0s, 9.96 M/s) | repairs C18=828421 out=9 | depth C18[1571579 828421 0 0 0|ex 0] out[1509507 39 0|ex 0] | maxclass=8 | certs yes=8058899 no=31422 UNCERTAIN=0 td2=7482 | phaseB hit=15563914 miss=22091
+N=70000000 verified | t(N)=2800000 |V_N|=7361137 (C7 2800000, C18 2800000, other 1761137) | 8.6s (+1.0s, 9.59 M/s) | repairs C18=966480 out=9 | depth C18[1833520 966480 0 0 0|ex 0] out[1761093 44 0|ex 0] | maxclass=8 | certs yes=9401135 no=36675 UNCERTAIN=0 td2=11771 | phaseB hit=18161526 miss=22495
+N=80000000 verified | t(N)=3200000 |V_N|=8412708 (C7 3200000, C18 3200000, other 2012708) | 9.5s (+0.9s, 11.09 M/s) | repairs C18=1104559 out=11 | depth C18[2095441 1104559 0 0 0|ex 0] out[2012660 48 0|ex 0] | maxclass=8 | certs yes=10742511 no=41932 UNCERTAIN=0 td2=17127 | phaseB hit=20757865 miss=22829
+N=90000000 verified | t(N)=3600000 |V_N|=9464269 (C7 3600000, C18 3600000, other 2264269) | 10.4s (+0.9s, 10.54 M/s) | repairs C18=1242610 out=12 | depth C18[2357390 1242610 0 0 0|ex 0] out[2264216 53 0|ex 0] | maxclass=8 | certs yes=12084579 no=47200 UNCERTAIN=0 td2=23409 | phaseB hit=23354945 miss=23184
+DUMP N=100000000 written to runs/colouring_100000000.bin
+AUDIT N=100000000: PASS  classes=4000000 (=t(N)) members=10515898 (=|V_N|) maxclass=8 C18free=0 pairs_checked=10103256 bad=0 (3.6s)
+   class size histogram (incl. c_k): 1:0 2:2288035 3:1120317 4:425447 5:128240 6:30873 7:6053 8:1035
+N=100000000 verified | t(N)=4000000 |V_N|=10515898 (C7 4000000, C18 4000000, other 2515898) | 15.3s (+4.8s, 2.07 M/s) | repairs C18=1380697 out=13 | depth C18[2619303 1380697 0 0 0|ex 0] out[2515842 56 0|ex 0] | maxclass=8 | certs yes=13426246 no=52460 UNCERTAIN=0 td2=30673 | phaseB hit=25951673 miss=23548
+CHECKPOINT saved: runs/ckpt_1e8.bin (next n=100000001, T=4000000)
+replay log: 12046324 records
+CHECKPOINT saved: runs/ckpt_1e8.bin (next n=100000001, T=4000000)
+
+==== FINAL REPORT: all N <= 100000000 verified (online invariant held after every n) ====
+t(N)=4000000  |V_N|=10515898  C7=4000000 C18=4000000 other=2515898
+[C18] placements=4000000 repairs(plans with evictions)=1380697 (34.517%)
+   depth at which plan found: d0=2619303 d1=1380697 d2=0 d3=0 d4=0 exhaustive=0
+   plan size (#moves): 1=2619303 2=1230981 3=149716 4=0 5=0 6=0 7+=0
+   classes examined: 1:2619303 2:0 3:2 4:647039 5-8:599887 9-16:128760 17-32:4994 33-64:15 65-128:0 >128:0
+   fraction needing >1: 0.3452  >2: 0.3452  >4: 0.18341  >8: 0.033442  >16: 0.0012523  >32: 0.00000375
+[other] placements=2515898 repairs(plans with evictions)=13 (0.001%)
+   depth at which plan found: d0=2515842 d1=56 d2=0 d3=0 d4=0 exhaustive=0
+   plan size (#moves): 1=2515885 2=13 3=0 4=0 5=0 6=0 7+=0
+   classes examined: 1:1294460 2:548461 3:274048 4:152344 5-8:202347 9-16:42367 17-32:1869 33-64:2 65-128:0 >128:0
+   fraction needing >1: 0.4855  >2: 0.2675  >4: 0.09801  >8: 0.017583  >16: 0.0007437  >32: 0.00000079
+existing vertices moved: C18=1380695 other=149731 ; exhaustive searches=0 ; placement failures=0
+max class size (incl. c_k)=8 (first reached at n=83672)
+certificates: computed=13478706 YES=13426246 NO=52460 UNCERTAIN=0 ; phase-B lookups hit=25951673 miss=23548 ; commit re-checks=12493370
+cert paths: calls=13478706 td_no=52053 td_early_yes=419774 cof_small_yes=6469733 sq_no=216 <P^3_yes=6588152 MR=10196785(prime 5041881) cube_no=0 hard=5154904 rho=5242520(found 5124231, iters 7295051832) td2=30673(found 0, none->yes 30673) unk=0 quick=50305116(no 18720797)
+audits=2106 (pairs re-checked with reference test: 22620669)
+phase times: A(parallel prefetch)=6.9s B(sequential)=1.2s total=15.3s

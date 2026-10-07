@@ -1,0 +1,4 @@
+# Part A (analytic/) and tests/brute.py: Python >= 3.9 with numpy (tested: Python 3.9.6, numpy 2.0.2)
+numpy>=1.20
+# audit/ scripts only (cmp_brute.py, rho_check.py): sympy (tested: 1.14.0)
+sympy>=1.9

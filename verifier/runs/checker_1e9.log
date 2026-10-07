@@ -1,0 +1,4 @@
+independent V: 25423491 primes p=1 mod 4, |V_N|=105158686 (5.1s)
+REPLAY runs/log_1e9.bin: N=1000000000 records=120457382 steps(vertices)=105158686 moves=15298696 pairs_checked=124904274 bad_pairs=0 errors=0  => PASS (proper t(n)-colouring of G_n for every n <= N)  (155.9s)
+dump N=1000000000 T=40000000; independent |V_N|=105158686 (4.8s)
+DUMP CHECK runs/colouring_1000000000.bin: N=1000000000 classes=40000000 members=105158686 max_class=8 pairs_checked=101024555 bad=0 errors=0 => PASS (148.7s)

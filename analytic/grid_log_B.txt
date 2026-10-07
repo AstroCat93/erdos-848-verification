@@ -1,0 +1,22 @@
+# grid start N1=100000000000000 NEND=1.000e+20
+OK [1.000000e+14, 1.020000e+14] worst=II.a UB/N_hi=0.027649 slack/N_lo=0.011798 t=40s
+OK [1.020000e+14, 1.237613e+14] worst=II.a UB/N_hi=0.027646 slack/N_lo=0.006456 t=77s
+OK [1.237613e+14, 1.382129e+14] worst=II.a UB/N_hi=0.027644 slack/N_lo=0.009128 t=116s
+OK [1.382129e+14, 1.610327e+14] worst=II.a UB/N_hi=0.027641 slack/N_lo=0.007795 t=182s
+OK [1.610327e+14, 1.837385e+14] worst=II.a UB/N_hi=0.027640 slack/N_lo=0.008463 t=264s
+OK [1.837385e+14, 2.118688e+14] worst=II.a UB/N_hi=0.027638 slack/N_lo=0.008131 t=333s
+OK [2.118688e+14, 2.430338e+14] worst=II.a UB/N_hi=0.027636 slack/N_lo=0.008299 t=409s
+OK [2.430338e+14, 2.795243e+14] worst=II.a UB/N_hi=0.027634 slack/N_lo=0.008216 t=491s
+OK [2.795243e+14, 3.210794e+14] worst=II.a UB/N_hi=0.027633 slack/N_lo=0.008259 t=560s
+OK [3.210794e+14, 3.690638e+14] worst=II.a UB/N_hi=0.027631 slack/N_lo=0.008239 t=614s
+OK [3.690638e+14, 4.240885e+14] worst=II.a UB/N_hi=0.027630 slack/N_lo=0.008250 t=687s
+OK [4.240885e+14, 4.874054e+14] worst=II.a UB/N_hi=0.027629 slack/N_lo=0.008246 t=762s
+OK [4.874054e+14, 5.601373e+14] worst=II.a UB/N_hi=0.027628 slack/N_lo=0.008249 t=851s
+OK [5.601373e+14, 6.437557e+14] worst=II.a UB/N_hi=0.027628 slack/N_lo=0.008248 t=937s
+OK [6.437557e+14, 7.398482e+14] worst=II.a UB/N_hi=0.027627 slack/N_lo=0.008249 t=1019s
+OK [7.398482e+14, 8.502987e+14] worst=II.a UB/N_hi=0.027627 slack/N_lo=0.008249 t=1131s
+OK [8.502987e+14, 9.772367e+14] worst=II.a UB/N_hi=0.027627 slack/N_lo=0.008249 t=1258s
+OK [9.772367e+14, 1.123130e+15] worst=II.a UB/N_hi=0.027627 slack/N_lo=0.008249 t=1400s
+OK [1.123130e+15, 1.290803e+15] worst=II.a UB/N_hi=0.027638 slack/N_lo=0.008236 t=1537s
+OK [1.290803e+15, 1.483122e+15] worst=II.a UB/N_hi=0.027638 slack/N_lo=0.008244 t=1722s
+OK [1.483122e+15, 1.704328e+15] worst=II.a UB/N_hi=0.027638 slack/N_lo=0.008240 t=1881s

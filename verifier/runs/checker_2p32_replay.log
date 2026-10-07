@@ -1,0 +1,4 @@
+independent V: 101638380 primes p=1 mod 4, |V_N|=451653474 (29.0s)
+CHECK FAIL: unexpected record (1000000007,40000001): next V vertex is 7
+CHECK FAIL: log ends after vertex 0; next V vertex 7 <= N not placed
+REPLAY runs/log_2p32.bin: N=4294967295 records=1 steps(vertices)=0 moves=0 pairs_checked=0 bad_pairs=0 errors=2  => FAIL  (29.1s)

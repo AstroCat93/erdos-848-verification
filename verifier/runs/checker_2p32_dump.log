@@ -1,0 +1,2 @@
+dump N=4294967295 T=171798692; independent |V_N|=451653474 (27.6s)
+DUMP CHECK runs/colouring_4294967295.bin: N=4294967295 classes=171798692 members=451653474 max_class=8 pairs_checked=433903423 bad=0 errors=0 => PASS (1812.8s)

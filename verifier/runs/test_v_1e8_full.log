@@ -1,0 +1,4 @@
+[V sieve vs independent sieve] N=100000000: |V|=10515898 vs 10515898, primes 2880504 vs 2880504, mismatching words=0  (0.1s + 0.6s)
+[direct ref_sf(n^2+1)] all n <= 100000000: 10515898 in V (sieve count 10515898), mismatches=0  (39.1s)
+[random direct] 1000000 samples (half uniform in [1,N], half random members of V; 552357 in V): mismatches=0  (0.2s)
+TEST_V PASS

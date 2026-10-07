@@ -1,0 +1,55 @@
+sqf: B1=4096 (563 odd primes), table primes up to 2699999 (196644 primes)
+[prime] all n <= 67108864 vs sieve: mismatches=0
+[prime] 13 sieve windows of 2^18 at magnitudes 2^33..2^64: mismatches=0
+[prime] 44 special (pseudo)primes: mismatches=0
+[exhaustive] all m in [0,30000000): mismatches=0
+[exhaustive] all m in [18446744073707551615,18446744073709551615): mismatches=0
+[exhaustive] all m in [4293967296,4295967296): mismatches=0
+--- random classes, rho budget 4096 x 2 tries
+[uniform64             ] n=1000000 yes=608464 no=391536 unk=0  (3.7s)  paths: td_no=391520 early=1700 cofsmall=372781 sq=7 ltP3=209530 mr=753966 prime=357067 cube=0 hard=396899 rho=364763/441081 td2=32136(found 0, none 32136)
+[u*v+1(<2^32)          ] n=1000000 yes=748149 no=251851 unk=0  (4.9s)  paths: td_no=251829 early=2428 cofsmall=455541 sq=9 ltP3=265975 mr=906843 prime=430283 cube=0 hard=476560 rho=441329/525763 td2=35231(found 0, none 35231)
+[u*v+1(<1e9)           ] n=1000000 yes=748516 no=251484 unk=0  (2.2s)  paths: td_no=251468 early=5692 cofsmall=433186 sq=6 ltP3=308119 mr=798551 prime=382067 cube=0 hard=416484 rho=398522/444786 td2=17962(found 0, none 17962)
+[p^2*q                 ] n=1000000 yes=0 no=1000000 unk=0  (1.7s)  paths: td_no=587655 early=0 cofsmall=82726 sq=325664 ltP3=944 mr=199408 prime=0 cube=1 hard=199408 rho=199407/199412 td2=0(found 0, none 0)
+[p^2                   ] n=1000000 yes=0 no=1000000 unk=0  (2.3s)  paths: td_no=166242 early=0 cofsmall=0 sq=833758 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[p*q close             ] n=1000000 yes=1000000 no=0 unk=0  (15.6s)  paths: td_no=0 early=0 cofsmall=665840 sq=0 ltP3=456862 mr=1000000 prime=0 cube=0 hard=1000000 rho=561351/1523839 td2=438649(found 0, none 438649)
+[p*q*r ~2^21           ] n=1000000 yes=999985 no=15 unk=0  (10.5s)  paths: td_no=0 early=0 cofsmall=2944882 sq=11 ltP3=27541 mr=1972444 prime=0 cube=0 hard=1972444 rho=1972444/1974426 td2=0(found 0, none 0)
+[p^3,p^3*q             ] n=1000000 yes=0 no=1000000 unk=0  (14.8s)  paths: td_no=109050 early=0 cofsmall=3349 sq=0 ltP3=0 mr=894845 prime=0 cube=887580 hard=894845 rho=7265/7265 td2=0(found 0, none 0)
+[p*q (p in 2^12..2^22) ] n=1000000 yes=1000000 no=0 unk=0  (20.0s)  paths: td_no=0 early=0 cofsmall=999797 sq=0 ltP3=0 mr=1999797 prime=999797 cube=0 hard=1000000 rho=999797/1009418 td2=203(found 0, none 203)
+[p^2*q*r               ] n=1000000 yes=0 no=1000000 unk=0  (1.2s)  paths: td_no=221 early=0 cofsmall=826730 sq=833291 ltP3=71209 mr=1097586 prime=0 cube=3 hard=1097586 rho=1097583/1097594 td2=0(found 0, none 0)
+[s^2                   ] n=1000000 yes=0 no=1000000 unk=0  (0.6s)  paths: td_no=932934 early=0 cofsmall=0 sq=67066 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[k*p^2                 ] n=1000000 yes=0 no=1000000 unk=0  (2.7s)  paths: td_no=383696 early=0 cofsmall=0 sq=616304 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[p^2*q rough           ] n=1000000 yes=0 no=1000000 unk=0  (4.1s)  paths: td_no=0 early=0 cofsmall=948825 sq=954865 ltP3=173 mr=1000000 prime=0 cube=0 hard=1000000 rho=1000000/1000003 td2=0(found 0, none 0)
+[p*q rough balanced    ] n=250000 yes=250000 no=0 unk=0  (12.5s)  paths: td_no=0 early=0 cofsmall=1035 sq=0 ltP3=20281 mr=253810 prime=3810 cube=0 hard=250000 rho=12563/493014 td2=237437(found 0, none 237437)
+--- random classes, rho DISABLED (fallback trial division only)
+[uniform64             ] n=200000 yes=121757 no=78243 unk=0  (0.6s)  paths: td_no=78238 early=334 cofsmall=144 sq=0 ltP3=29190 mr=130370 prime=54483 cube=0 hard=75887 rho=0/0 td2=75887(found 38281, none 37606)
+[u*v+1(<2^32)          ] n=200000 yes=149368 no=50632 unk=0  (0.6s)  paths: td_no=50629 early=515 cofsmall=237 sq=0 ltP3=35823 mr=157887 prime=66354 cube=0 hard=91533 rho=0/0 td2=91533(found 45094, none 46439)
+[u*v+1(<1e9)           ] n=200000 yes=149324 no=50676 unk=0  (0.3s)  paths: td_no=50672 early=1203 cofsmall=499 sq=0 ltP3=39082 mr=144428 prime=64409 cube=0 hard=80019 rho=0/0 td2=80019(found 35888, none 44131)
+[p^2*q                 ] n=200000 yes=0 no=200000 unk=0  (0.4s)  paths: td_no=117606 early=0 cofsmall=0 sq=60484 ltP3=0 mr=40615 prime=0 cube=1 hard=40615 rho=0/0 td2=40614(found 40614, none 0)
+[p^2                   ] n=200000 yes=0 no=200000 unk=0  (0.5s)  paths: td_no=33317 early=0 cofsmall=0 sq=166683 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[p*q close             ] n=200000 yes=200000 no=0 unk=0  (1.6s)  paths: td_no=0 early=0 cofsmall=0 sq=0 ltP3=0 mr=200000 prime=0 cube=0 hard=200000 rho=0/0 td2=200000(found 0, none 200000)
+[p*q*r ~2^21           ] n=200000 yes=199995 no=5 unk=0  (2.0s)  paths: td_no=0 early=0 cofsmall=0 sq=2 ltP3=197543 mr=202452 prime=0 cube=0 hard=202452 rho=0/0 td2=202452(found 200000, none 2452)
+[p^3,p^3*q             ] n=200000 yes=0 no=200000 unk=0  (2.3s)  paths: td_no=21672 early=0 cofsmall=0 sq=0 ltP3=0 mr=179201 prime=0 cube=177720 hard=179201 rho=0/0 td2=1481(found 1481, none 0)
+[p*q (p in 2^12..2^22) ] n=200000 yes=200000 no=0 unk=0  (4.6s)  paths: td_no=0 early=0 cofsmall=0 sq=0 ltP3=114659 mr=203752 prime=3752 cube=0 hard=200000 rho=0/0 td2=200000(found 118411, none 81589)
+[p^2*q*r               ] n=200000 yes=0 no=200000 unk=0  (0.2s)  paths: td_no=57 early=0 cofsmall=0 sq=178302 ltP3=0 mr=237305 prime=0 cube=0 hard=237305 rho=0/0 td2=237305(found 237305, none 0)
+[s^2                   ] n=200000 yes=0 no=200000 unk=0  (0.1s)  paths: td_no=186376 early=0 cofsmall=0 sq=13624 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[k*p^2                 ] n=200000 yes=0 no=200000 unk=0  (0.6s)  paths: td_no=76893 early=0 cofsmall=0 sq=123107 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[p^2*q rough           ] n=200000 yes=0 no=200000 unk=0  (0.6s)  paths: td_no=0 early=0 cofsmall=0 sq=191949 ltP3=0 mr=200000 prime=0 cube=0 hard=200000 rho=0/0 td2=200000(found 200000, none 0)
+[p*q rough balanced    ] n=50000 yes=50000 no=0 unk=0  (1.7s)  paths: td_no=0 early=0 cofsmall=0 sq=0 ltP3=0 mr=50000 prime=0 cube=0 hard=50000 rho=0/0 td2=50000(found 0, none 50000)
+--- random classes, rho budget 64 x 3 tries
+[uniform64             ] n=200000 yes=121958 no=78042 unk=0  (0.6s)  paths: td_no=78039 early=358 cofsmall=20126 sq=2 ltP3=26818 mr=134683 prime=56766 cube=0 hard=77917 rho=19781/209136 td2=58136(found 20468, none 37668)
+[u*v+1(<2^32)          ] n=200000 yes=149859 no=50141 unk=0  (0.7s)  paths: td_no=50134 early=521 cofsmall=24409 sq=1 ltP3=33445 mr=162920 prime=69756 cube=0 hard=93164 rho=23861/249653 td2=69303(found 23717, none 45586)
+[u*v+1(<1e9)           ] n=200000 yes=149903 no=50097 unk=0  (0.3s)  paths: td_no=50094 early=1190 cofsmall=23832 sq=0 ltP3=37078 mr=149394 prime=67604 cube=0 hard=81790 rho=22580/216975 td2=59210(found 16432, none 42778)
+[p^2*q                 ] n=200000 yes=0 no=200000 unk=0  (0.4s)  paths: td_no=117521 early=0 cofsmall=8276 sq=62480 ltP3=78 mr=40175 prime=0 cube=0 hard=40175 rho=17092/99043 td2=23083(found 23083, none 0)
+[p^2                   ] n=200000 yes=0 no=200000 unk=0  (0.5s)  paths: td_no=33379 early=0 cofsmall=0 sq=166621 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[p*q close             ] n=200000 yes=200000 no=0 unk=0  (1.5s)  paths: td_no=0 early=0 cofsmall=1096 sq=0 ltP3=58 mr=200000 prime=0 cube=0 hard=200000 rho=577/599394 td2=199423(found 0, none 199423)
+[p*q*r ~2^21           ] n=200000 yes=199999 no=1 unk=0  (1.8s)  paths: td_no=0 early=0 cofsmall=18652 sq=0 ltP3=182535 mr=217464 prime=0 cube=0 hard=217464 rho=18336/632322 td2=199128(found 181980, none 17148)
+[p^3,p^3*q             ] n=200000 yes=0 no=200000 unk=0  (2.0s)  paths: td_no=21711 early=0 cofsmall=560 sq=0 ltP3=0 mr=179146 prime=0 cube=177687 hard=179146 rho=1017/3031 td2=442(found 442, none 0)
+[p*q (p in 2^12..2^22) ] n=200000 yes=200000 no=0 unk=0  (5.3s)  paths: td_no=0 early=0 cofsmall=4042 sq=0 ltP3=112063 mr=206300 prime=6300 cube=0 hard=200000 rho=4042/595693 td2=195958(found 114321, none 81637)
+[p^2*q*r               ] n=200000 yes=0 no=200000 unk=0  (0.3s)  paths: td_no=47 early=0 cofsmall=122186 sq=176488 ltP3=5146 mr=231378 prime=0 cube=3 hard=231378 rho=138203/517339 td2=93172(found 93172, none 0)
+[s^2                   ] n=200000 yes=0 no=200000 unk=0  (0.2s)  paths: td_no=186480 early=0 cofsmall=0 sq=13520 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[k*p^2                 ] n=200000 yes=0 no=200000 unk=0  (0.7s)  paths: td_no=76792 early=0 cofsmall=0 sq=123208 ltP3=0 mr=0 prime=0 cube=0 hard=0 rho=0/0 td2=0(found 0, none 0)
+[p^2*q rough           ] n=200000 yes=0 no=200000 unk=0  (0.8s)  paths: td_no=0 early=0 cofsmall=111949 sq=192067 ltP3=2 mr=200000 prime=0 cube=0 hard=200000 rho=112376/450799 td2=87624(found 87624, none 0)
+[p*q rough balanced    ] n=50000 yes=50000 no=0 unk=0  (2.0s)  paths: td_no=0 early=0 cofsmall=0 sq=0 ltP3=3 mr=50001 prime=1 cube=0 hard=50000 rho=2/149999 td2=49998(found 0, none 49998)
+
+TOTAL FAILURES: 0   (155.6s)
+EXIT CODE 0
