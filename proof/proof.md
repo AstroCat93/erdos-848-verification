@@ -10,13 +10,15 @@ For $N\ge1$ let $t(N)=\#\{n\le N:\ n\equiv 7\pmod{25}\}=\lfloor (N+18)/25\rfloor
 Equality holds for $A=\{n\le N: n\equiv7 \pmod{25}\}$, since $7\cdot 7+1=50$ and so $25\mid ab+1$ whenever $a\equiv b\equiv 7\pmod{25}$.
 
 **Structure of the proof.**
-- Part A (analytic, Sections 1–6): the theorem holds for every $N\ge N_1:=4.2\cdot10^{7}$. The numerical inequalities are checked by exact rational arithmetic on a finite grid of intervals (Section 5), plus a closed-form tail for $N\ge10^{40}$ (Section 6).
+- Part A (analytic, Sections 1–6): the theorem holds for every $N\ge N_1:=4.2\cdot10^{7}$. The numerical inequalities are checked by exact rational arithmetic on a finite grid of intervals covering $[4.2\cdot10^7,1.14\cdot10^{14}]$ (Section 5), plus a uniform tail argument for $N\ge10^{14}$ (Section 6: explicit error bounds evaluated on a doubling grid up to $10^{300}$, in floating point with a 1% safety factor, and a closed form beyond).
 - Part B (computational, Section 7): the theorem holds for every $N\le N_1$, certified by an online proper colouring.
 
-Sawhney (2025) proved the theorem for all sufficiently large $N$. Part A follows his case split, with three changes:
-1. **Switching.** Large prime squares are counted through the cofactor ($ab+1=mp^2$ with $m$ small), not one prime at a time. This replaces an error of size $\pi(N)$ by about $2^{\omega(b)}N^{2/3}$.
+Sawhney (2025; acknowledging M. Sellke, with assistance from ChatGPT 5 Pro) proved the theorem for all sufficiently large $N$. Part A follows his case split. The tools it adds are standard, and several appear in earlier explicit work:
+1. **Switching.** Large prime squares are counted through the cofactor ($ab+1=mp^2$ with $m$ small), not one prime at a time. This replaces an error of size $\pi(N)$ by about $2^{\omega(b)}N^{2/3}$. The device is classical (Estermann, Hooley, Heath-Brown) and is used in explicit form by Sothanaphan, Li and Pitchford.
 2. **Self-sieving of $A^*$.** The elements of $A$ outside $7,18\pmod{25}$ are sieved by the same "pivot" elements that sieve the residue classes.
 3. **A mod-100 parity analysis.** This exploits that $x\equiv7$ and $y\equiv43\pmod{100}$ have $xy+1\equiv 2\pmod 4$ and $xy+1\equiv 2\pmod{25}$.
+
+The elements outside $7,18\pmod{25}$ with a large prime-square divisor of $x^2+1$ are bounded with the negative Pell equation (Lemma 4), as in Sothanaphan and Pitchford.
 
 Notation:
 - $V_N=\{n\le N:\ \mu(n^2+1)=0\}$. Every element of a valid $A$ lies in $V_N$.
@@ -157,12 +159,12 @@ Sample margins, in units of $N$ (the worst case is II.b.2b at small $N$ and II.a
 
 | $N$ | worst UB$/N$ | needed |
 |---|---|---|
-| $4.2\cdot10^7$ | 0.03834 | $<0.04$ |
+| $4.2\cdot10^7$ | 0.03845 | $<0.04$ |
 | $10^8$ | 0.03450 | |
 | $10^9$ | 0.03053 | |
 | $10^{12}$ | 0.02788 | |
 | $10^{40}$ | 0.02806 | |
-| $10^{100}$ | 0.02820 | |
+| $10^{100}$ | 0.02819 | |
 
 ## 6. Tail $N\ge10^{14}$ (`analytic/asymptotic.py: tail_check2`)
 
@@ -185,13 +187,13 @@ $$\mathrm{Err}\le c_0+4\big(\pi(Y)+E(2N_i,Y,\rho^*(2N_i))\big)+2\pi(Y_q)+\mathrm
 **Beyond $10^{300}$.**
 - Use Robin's bound $\omega(n)\le1.38402\ln n/\ln\ln n$ for $n\ge3$, so that $\rho^*(N)\le4\cdot2^{1.38402\ln N/\ln\ln N}$.
 - The error majorant then has the form
-$$\frac{c_0}{N}+7\cdot1.25506\,\frac{N^{-0.2}}{0.8\ln N}+16\cdot2^{1.38402\ln N/\ln\ln N}\,\big(2N^{-0.8}+N^{-0.6}\big)+10N^{-1/2}.$$
+$$\frac{c_0}{N}+7\cdot1.25506\,\frac{N^{-0.2}}{0.8\ln N}+17\cdot2^{1.38402\ln N/\ln\ln N}\,\big(2N^{-0.8}+N^{-0.6}\big)+10N^{-1/2}.$$
 - **Each term decreases in $N$.** For the third term, $\frac{d}{du}\big[0.9593\,u/\ln u-0.6u\big]<0$ for $u=\ln N\ge 690$.
-- The majorant is $<10^{-100}$ at $10^{300}$.
+- The majorant is $<10^{-61}$ at $10^{300}$.
 
 **Combined with the grid.** The grid covers $[4.2\cdot10^7,10^{14}]$, so Part A holds for all $N\ge4.2\cdot10^{7}$.
 
-**Audit.** An independent adversarial audit (`audit/`) re-derived Lemmas 1–5 and the case split, and re-implemented two cases from this text. Its values agree to 3–4 digits, and rigorous.py is always the larger. Brute-force tests found no bound exceeded. It found no fatal issue. Its minor points are addressed:
+**Audit.** An independent adversarial audit (`audit/`) re-derived Lemmas 1–5 and the case split, and re-implemented the two binding cases (II.a, II.b.2b) from this text. Its values for these cases lie within about 2% of ours, and rigorous.py is always the larger (for example $0.037765N$ against $0.038342N$ for case II.b.2b at $N=42{,}840{,}000$). Brute-force tests found no bound exceeded. It found no fatal issue. Its minor points are addressed:
 - monotonicity has been replaced by the argument above,
 - the knapsack now uses the dual LP bound,
 - a class label was fixed,
@@ -233,10 +235,11 @@ Uncertain cases are treated as edges, which is sound. No uncertain case occurred
 
 ## 8. Relation to other work
 
-- Sawhney (2025): proof for all large $N$.
+- Density bounds (per the problem page erdosproblems.com/848): van Doorn's argument gives $|A|\le(0.108\ldots+o(1))N$, and Weisenberg noted that the same proof gives about $0.105N$. Sawhney's note also credits Cambie, with van Doorn and Weisenberg, with substantial progress.
+- Sawhney (2025; acknowledging M. Sellke, with assistance from ChatGPT 5 Pro): proof for all large $N$.
 - Sothanaphan + GPT‑5.4 (Mar 2026): explicit $N_0=2.64\cdot10^{17}$.
 - Two unrefereed full-resolution claims (Jul/Aug 2026):
-  - A. C. Li: Lean 4 proof, threshold $5\cdot10^{11}$ plus certificates.
+  - A. C. Li (with OpenAI ChatGPT 5.5 and ChatGPT 5.6 and a personally developed AI-assisted proof-engineering system): Lean 4 proof; colourings for $N\le5\cdot10^6$, interval-wise checks from $5\cdot10^6$, uniform argument from $5\cdot10^{11}$.
   - I. Pitchford / OpenAI Codex: certificate chain up to $2.64\cdot10^{17}$.
 
-The argument here is independent of both. Its analytic threshold ($4.2\cdot10^7$) is about four orders of magnitude below Li's and about ten below the published explicit bound. That makes the finite part small enough to verify on a laptop.
+For comparison, our interval checks cover $[4.2\cdot10^7,1.14\cdot10^{14}]$ and our uniform argument covers $N\ge10^{14}$, so Li's thresholds are lower on both counts. This argument does not use the results, code or certificates of Li or Pitchford. Both claims were found during the literature search for this work, and their public write-ups were read for comparison and attribution. Its aim is a short, checkable proof whose finite part runs on a laptop. It is not a priority claim.

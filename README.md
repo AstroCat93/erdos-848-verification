@@ -7,7 +7,7 @@ for **every** N, together with all code and logs needed to check it.
 > It was produced with AI assistance; see the [disclosure](#ai-assistance-disclosure).
 > It is **not the first resolution** of the problem. Two earlier, also unrefereed, full-resolution claims
 > exist (A. C. Li; I. Pitchford / OpenAI Codex), and see [Prior work](#prior-work-and-credit) for the rest.
-> This repository gives an **independent and much shorter route** to the same answer.
+> This repository gives an **independent route** to the same answer, which may be easier to check.
 
 ## The problem
 
@@ -26,21 +26,28 @@ The proof (`proof/proof.md`) has two parts that overlap by a factor of about 100
 
 | part | range of N | method | where |
 |---|---|---|---|
-| **A** (analytic) | N ≥ N₁ = 4.2·10⁷ | Sawhney's case split, made explicit with three changes. Every inequality is checked in exact rational arithmetic on a finite grid of intervals [4.2·10⁷, 1.14·10¹⁴], and a certified tail covers N ≥ 10¹⁴. | proof §1–6, `analytic/` |
+| **A** (analytic) | N ≥ N₁ = 4.2·10⁷ | Sawhney's case split, made fully explicit (see below). Every inequality is checked in exact rational arithmetic on a finite grid of intervals [4.2·10⁷, 1.14·10¹⁴], and a certified tail covers N ≥ 10¹⁴. | proof §1–6, `analytic/` |
 | **B** (computational) | N ≤ 2³² − 1 ≈ 4.29·10⁹ | An online proper colouring of the "conflict graph" G_N with exactly t(N) colour classes, maintained for every N. Every same-class pair u, v has uv + 1 *certified* squarefree, so no valid A can have more than t(N) elements. Every N is replayed by an independent checker. | proof §7, `verifier/` |
 
-The analytic threshold N₁ = 4.2·10⁷ is about four orders of magnitude below that of Li's analytic tail
-(5·10¹¹) and about ten below the published explicit threshold (2.64·10¹⁷, Sothanaphan). As a result the
-finite part fits on a laptop. All N ≤ 10⁸, which already exceeds N₁, take under half a minute including the
-independent replay. All N ≤ 2³² − 1 take about 25 min of colouring plus about 70 min of independent checking.
+The analytic part starts at N₁ = 4.2·10⁷: exact-rational interval checks cover [4.2·10⁷, 1.14·10¹⁴] and a
+uniform argument covers N ≥ 10¹⁴ (explicit error bounds on a doubling grid up to 10³⁰⁰, evaluated in floating
+point with a 1% safety factor, and a closed form beyond). (For comparison, Li's interval-wise checks start at
+5·10⁶ and his uniform argument at 5·10¹¹; see the table in the paper.) Because N₁ is small, the finite part
+fits on a laptop. All N ≤ 10⁸, which already exceeds N₁, take under half a minute including the independent
+replay. All N ≤ 2³² − 1 take about 30 min of colouring plus about 70 min of independent checking.
 
-Part A follows Sawhney's case split with three changes (proof §0):
+Part A follows Sawhney's case split. The tools it adds are standard, and several appear in earlier explicit
+work (proof §0):
 
-1. **Switching for large primes.** Large prime squares are counted through the cofactor m in ab + 1 = mp²,
-   which costs about 2^ω(b)·N^{2/3} instead of π(N).
+1. **Switching for large primes.** Large prime squares are counted through the cofactor m in ab + 1 = mp², which
+   costs about 2^ω(b)·N^{2/3} instead of π(N). The device is classical (Estermann, Hooley, Heath-Brown) and is
+   used in explicit form by Sothanaphan, Li and Pitchford.
 2. **Self-sieving.** The elements of A outside the classes 7, 18 (mod 25) are sieved by the same pivot elements.
 3. **A mod-100 parity analysis.** It uses the fact that x ≡ 7 and y ≡ 43 (mod 100) give xy + 1 ≡ 2 (mod 4)
    and xy + 1 ≡ 2 (mod 25).
+
+The elements outside 7, 18 (mod 25) with a large prime-square divisor of x² + 1 are bounded with the negative
+Pell equation, as in Sothanaphan and Pitchford.
 
 ## Repository layout
 
@@ -72,7 +79,7 @@ tests/
   run_tests.sh                small-N checks, unit tests, negative controls (about 50 s)
   clique_check.c              exact max-clique induction for all N <= 1e5 (independent of the colouring)
   brute.py                    pure-Python Bron-Kerbosch max clique for one N
-audit/                      adversarial audit of Part A: independent re-implementation, brute-force data (see audit/README.md)
+audit/                      adversarial audit of Part A: independent re-implementation of the two binding cases (II.a, II.b.2b), brute-force lemma tests (see audit/README.md)
 notes/literature.md         literature and forum notes (as of 2026-10-07)
 ```
 
@@ -132,7 +139,7 @@ in `grid2/` come from the original run. A single interval can be certified with
 verifier/reproduce.sh quick      # all N <= 1e7:   2.6 s
 verifier/reproduce.sh 1e8        # all N <= 1e8:   24 s  (already covers N_1 = 4.2e7)
 verifier/reproduce.sh 1e9        # all N <= 1e9:    about 10 min (estimate from the original logs)
-verifier/reproduce.sh full       # all N <= 2^32-1: about 25 min colour + 70 min checker (estimate);
+verifier/reproduce.sh full       # all N <= 2^32-1: about 30 min colour + 70 min checker (estimate);
                                  #   about 6.7 GB of disk; the class table alone needs 5.5 GB of RAM
 ```
 
@@ -267,22 +274,23 @@ Their SHA-256 (full list in `verifier/runs/SHA256SUMS.txt`):
 
 - **Problem source.** P. Erdős and A. Sárközy; see [Er92b, p. 239] in the erdosproblems.com bibliography,
   and [erdosproblems.com/848](https://www.erdosproblems.com/848) with its
-  [forum thread](https://www.erdosproblems.com/forum/thread/848).
-- **First density bounds.**
-  - **W. van Doorn** showed |A| ≤ (0.108… + o(1))N. The argument: every a ∈ A has p² | a² + 1 for some
-    prime p ≡ 1 (mod 4).
-  - **D. Weisenberg** improved this to about 0.105·N by inclusion–exclusion.
-  - **S. Cambie** contributed to the 2025 forum discussion of the structure of large valid sets.
-- **M. Sawhney (2025)** proved the statement for all sufficiently large N, with assistance from GPT-5 Pro:
-  [Problem_848.pdf](https://www.math.columbia.edu/~msawhney/Problem_848.pdf). Part A here follows his case
-  split.
+  [forum thread](https://www.erdosproblems.com/forum/thread/848) (from August 2025).
+- **First density bounds** (as recorded on the [problem page](https://www.erdosproblems.com/848)).
+  - **W. van Doorn**'s argument gives |A| ≤ (0.108… + o(1))N.
+  - **D. Weisenberg** noted that the same proof gives about 0.105·N.
+  - **S. Cambie** is credited in Sawhney's note, together with van Doorn and Weisenberg, with substantial
+    progress towards the problem.
+- **M. Sawhney (2025; acknowledging M. Sellke, with assistance from ChatGPT 5 Pro)** proved the statement for
+  all sufficiently large N: [Problem_848.pdf](https://www.math.columbia.edu/~msawhney/Problem_848.pdf). Part A
+  here follows his case split.
 - **N. Sothanaphan, with GPT-5.4 (March 2026),** made Sawhney's argument explicit, with N₀ = 2.64·10¹⁷.
   The notes were posted in the erdosproblems.com forum thread.
 - **Two full-resolution claims precede this work.** Both are unrefereed.
-  - **Alex Chengyu Li** (Jul–Aug 2026) has a Lean 4 formalisation. It is proof claim #204 on erdosproblems.com,
-    the code is at [github.com/crabsatellite/erdos-848-squarefree-product](https://github.com/crabsatellite/erdos-848-squarefree-product),
-    and the paper is SSRN 7230480. Its uniform analytic tail starts at 5·10¹¹; below that it uses
-    certificates.
+  - **Alex Chengyu Li** (Jul–Aug 2026), using OpenAI ChatGPT 5.5 and ChatGPT 5.6 and a personally developed
+    AI-assisted proof-engineering system (as stated in the claim), has a Lean 4 formalisation. It is proof
+    claim #204 on erdosproblems.com, the code is at [github.com/crabsatellite/erdos-848-squarefree-product](https://github.com/crabsatellite/erdos-848-squarefree-product),
+    and the paper is SSRN 7230480. Its interval-wise checks start at 5·10⁶ and its uniform argument at
+    5·10¹¹; below 5·10⁶ it uses colouring certificates.
   - **Ian Pitchford / OpenAI Codex** (Jul 2026) has a certificate chain up to 2.64·10¹⁷ and then
     Sothanaphan's bound. The code is at [github.com/ipitchford/erdos-848-all-n](https://github.com/ipitchford/erdos-848-all-n)
     and the archive is Zenodo [10.5281/zenodo.21647629](https://doi.org/10.5281/zenodo.21647629).
@@ -291,15 +299,16 @@ Their SHA-256 (full list in `verifier/runs/SHA256SUMS.txt`):
 - **Explicit number theory used.** Rosser–Schoenfeld (1962): π(x) < 1.25506 x / ln x. Robin (1983):
   ω(n) ≤ 1.38402 ln n / ln ln n.
 
-The argument here was developed independently of Li's and Pitchford's work. Its contribution is a
-**shorter proof with a much lower analytic threshold**, so that the finite part can be checked on a laptop.
-It is **not** a priority claim.
+This argument does not use the results, code or certificates of Li or Pitchford. Both claims were found during
+the literature search for this work, and their public write-ups were read for comparison and attribution. Its
+aim is a short, checkable proof whose finite part runs on a laptop. It is **not** a priority claim.
 
 ## AI-assistance disclosure
 
 The mathematics, code, computations, audit, and this write-up were produced by **Claude**, an AI model by
-Anthropic (model Claude Opus 5.5, running in Claude Code), at the request of [AUTHOR NAME]. The adversarial
-audit in `audit/` was also AI-generated. The proof has not been peer reviewed. Please treat it as an
+Anthropic (model Claude Opus 5.5, running in Claude Code), at the request of [AUTHOR NAME].
+[EDIT: state accurately what [AUTHOR NAME] did, e.g. posed the task, which parts they have read and checked.]
+The adversarial audit in `audit/` was also AI-generated. The proof has not been peer reviewed. Please treat it as an
 unrefereed, AI-generated, computer-assisted proof, and report any error you find (issues are welcome).
 
 ## How to cite

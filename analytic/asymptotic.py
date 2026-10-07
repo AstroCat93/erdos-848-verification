@@ -167,7 +167,7 @@ def pell_ub_float(N, Yq):
 def pi_rs(x):
     return 1.25506 * x / math.log(x)
 
-def tail_check2(NB=10**14, NTOP=10**300, theta=0.8, npiv=4, ratio=10):
+def tail_check2(NB=10**14, NTOP=10**300, theta=0.8, npiv=4, ratio=2):
     D = D_cases(); Dmax = float(max(D.values()))
     c0 = c0_bound()
     Ni, worst = NB, 0.0
