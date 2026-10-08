@@ -1,13 +1,15 @@
-# Erdős Problem #848 for all N: an explicit analytic bound plus a colouring certificate
+# Erdős Problem #848: an independent verification for all N
 
-This repository contains a computer-assisted proof that answers [Erdős Problem #848](https://www.erdosproblems.com/848)
-for **every** N, together with all code and logs needed to check it.
+This repository is an **independent verification** of the previously claimed resolution of
+[Erdős Problem #848](https://www.erdosproblems.com/848) for **every** N: a separate computer-assisted proof of
+the same result, together with all code and logs needed to check it. It verifies the result, not the earlier
+proofs, which we have not audited.
 
 > **Status (2026-10-07).** The proof is complete but computer-assisted, and it has **not been peer reviewed**.
 > It was produced with AI assistance; see the [disclosure](#ai-assistance-disclosure).
 > It is **not the first resolution** of the problem. Two earlier, also unrefereed, full-resolution claims
 > exist (A. C. Li; I. Pitchford / OpenAI Codex), and see [Prior work](#prior-work-and-credit) for the rest.
-> This repository gives an **independent route** to the same answer, which may be easier to check.
+> This repository reaches the same answer by an **independent route**, which may be easier to check.
 
 ## The problem
 
@@ -218,8 +220,10 @@ The checker's dump checks passed at N = 4.2·10⁷, 10⁸, 10⁹ and 2³² − 1
 and covered 433,903,423 same-class pairs.
 
 Over the whole run, `colour` computed 578,428,609 squarefree certificates: 576,183,405 squarefree,
-2,245,204 not squarefree, and **0 uncertain**. A C18 vertex needed a repair, a single eviction, 34.5% of the
-time. No placement ever failed, and the maximum class size was 8.
+2,245,204 not squarefree, and **0 uncertain**. A C18 insertion needed a repair 34.5% of the time, typically a
+swap: the new vertex displaces another class's C18 element, which moves to the class that has none. At most two
+earlier vertices moved per insertion: in about 6.4 M cases one further vertex also moved (repair depth 1).
+No placement ever failed, and the maximum class size was 8.
 
 Further checks recorded in the logs:
 
@@ -284,10 +288,10 @@ Their SHA-256 (full list in `verifier/runs/SHA256SUMS.txt`):
   all sufficiently large N: [Problem_848.pdf](https://www.math.columbia.edu/~msawhney/Problem_848.pdf). Part A
   here follows his case split.
 - **N. Sothanaphan, with GPT-5.4 (March 2026),** made Sawhney's argument explicit, with N₀ = 2.64·10¹⁷.
-  The notes were posted in the erdosproblems.com forum thread.
+  The notes are linked from the erdosproblems.com forum thread.
 - **Two full-resolution claims precede this work.** Both are unrefereed.
   - **Alex Chengyu Li** (Jul–Aug 2026), using OpenAI ChatGPT 5.5 and ChatGPT 5.6 and a personally developed
-    AI-assisted proof-engineering system (as stated in the claim), has a Lean 4 formalisation. It is proof
+    AI-assisted research and proof-engineering system (as stated in the claim), has a Lean 4 formalisation. It is proof
     claim #204 on erdosproblems.com, the code is at [github.com/crabsatellite/erdos-848-squarefree-product](https://github.com/crabsatellite/erdos-848-squarefree-product),
     and the paper is SSRN 7230480. Its interval-wise checks start at 5·10⁶ and its uniform argument at
     5·10¹¹; below 5·10⁶ it uses colouring certificates.
@@ -299,22 +303,27 @@ Their SHA-256 (full list in `verifier/runs/SHA256SUMS.txt`):
 - **Explicit number theory used.** Rosser–Schoenfeld (1962): π(x) < 1.25506 x / ln x. Robin (1983):
   ω(n) ≤ 1.38402 ln n / ln ln n.
 
-This argument does not use the results, code or certificates of Li or Pitchford. Both claims were found during
-the literature search for this work, and their public write-ups were read for comparison and attribution. Its
-aim is a short, checkable proof whose finite part runs on a laptop. It is **not** a priority claim.
+The aim here is an independent, checkable verification whose finite part runs on a laptop. We became aware of
+both claims during this work, after the approach of Part A had been designed; we then read their public
+write-ups (including their explicit switching and Pell lemmas) for comparison and attribution. All lemmas here
+are proved in full, and no result, code or certificate of theirs is used. This is not a priority claim.
 
 ## AI-assistance disclosure
 
-The mathematics, code, computations, audit, and this write-up were produced by **Claude**, an AI model by
-Anthropic (model Claude Opus 5.5, running in Claude Code), at the request of [AUTHOR NAME].
-[EDIT: state accurately what [AUTHOR NAME] did, e.g. posed the task, which parts they have read and checked.]
-The adversarial audit in `audit/` was also AI-generated. The proof has not been peer reviewed. Please treat it as an
-unrefereed, AI-generated, computer-assisted proof, and report any error you find (issues are welcome).
+**Nathan Durfee** is the composer and prompter of this work: he conceived and directed the project. The
+mathematics, code, computations, audit, and this write-up were produced by **Claude**, an AI model by Anthropic
+(model Claude Opus 5.5, running in Claude Code), with adversarial review by separate Claude instances and the
+computer verification described above. Nathan Durfee has not personally verified the mathematics.
+The adversarial audit in `audit/` was also AI-generated; the fixes it prompted (interval principle, dual LP
+bound, `tail_check2`) were made after the audit and were re-checked by later separate review agents, not by the
+original audit. The proof has not been peer reviewed. Please treat it as an unrefereed, AI-generated,
+computer-assisted proof, and report any error you find (issues are welcome).
 
 ## How to cite
 
-[AUTHOR NAME] (2026). *Erdős Problem #848 for all N: an explicit analytic bound plus a colouring certificate.*
-[REPOSITORY URL] (AI-assisted; Claude Opus 5.5).
+Nathan Durfee (2026). *Erdős Problem #848: an independent verification for all N.*
+https://github.com/AstroCat93/erdos-848-verification (Nathan Durfee, composer and prompter; mathematics, code
+and text by Claude Opus 5.5, Anthropic).
 
 ## License
 

@@ -1,6 +1,8 @@
-# Erdős Problem #848 for all N — an explicit analytic bound plus a colouring certificate
+# Erdős Problem #848 for all N — an independent verification (explicit analytic bound plus colouring certificate)
 
-*Draft, 2026-10-07. Status: complete computer-assisted proof for all N; analytic part independently audited (no fatal issues; minor issues fixed); finite part independently replayed. Not peer reviewed.*
+*AI disclosure: the mathematics, code and text were produced by Claude (Anthropic, Claude Opus 5.5), with adversarial review by separate Claude instances and computer verification. Nathan Durfee (composer and prompter) conceived and directed the project; he has not personally verified the mathematics. See README, "AI-assistance disclosure".*
+
+*Draft, 2026-10-07. Status: an independent verification, by a complete computer-assisted proof for all N, of the resolution previously claimed by A. C. Li and by I. Pitchford / OpenAI Codex (Section 8); analytic part audited by a separate AI agent (no fatal issues; minor issues fixed); finite part replayed by an independently written checker. Not peer reviewed.*
 
 ## 0. Statement
 
@@ -161,7 +163,7 @@ Sample margins, in units of $N$ (the worst case is II.b.2b at small $N$ and II.a
 |---|---|---|
 | $4.2\cdot10^7$ | 0.03845 | $<0.04$ |
 | $10^8$ | 0.03450 | |
-| $10^9$ | 0.03053 | |
+| $10^9$ | 0.03052 | |
 | $10^{12}$ | 0.02788 | |
 | $10^{40}$ | 0.02806 | |
 | $10^{100}$ | 0.02819 | |
@@ -169,15 +171,12 @@ Sample margins, in units of $N$ (the worst case is II.b.2b at small $N$ and II.a
 ## 6. Tail $N\ge10^{14}$ (`analytic/asymptotic.py: tail_check2`)
 
 **Limiting densities.** Let $D_{\rm case}$ be the sum of all main densities: the class mains, the mid-prime mains, $\sum_{p>P_1}p^{-2}$ per pivot, the $O$-tail density $\sum_{q>Q_s,\,q\equiv1(4)}2/(\mathrm{div}\,q^2)$, and **all** matched gains switched on. These are computed in exact arithmetic by `D_cases()`. Then
-$$\max_{\rm case}D_{\rm case}=0.0281946\ldots \quad\text{(case II.a)}.$$
+$$\max_{\rm case}D_{\rm case}=0.0281945\ldots \quad\text{(case II.a)}.$$
 Every case bound satisfies $\mathrm{UB}_{\rm case}(N)\le D_{\rm case}N+\mathrm{Err}$.
 
 **Error terms.** With $Y=Y_q=\lceil N_i^{0.8}\rceil$ held fixed on the interval $[N_i,2N_i]$,
 $$\mathrm{Err}\le c_0+4\big(\pi(Y)+E(2N_i,Y,\rho^*(2N_i))\big)+2\pi(Y_q)+\mathrm{Pell}(2N_i,Y_q).$$
-- **The constant $c_0$.** It counts the inclusion–exclusion errors, the mid-prime ceilings and the full-class ceilings:
-  - at most 226 per class,
-  - across at most 348 classes,
-  - so $c_0\le 78{,}658$.
+- **The constant $c_0$.** It counts the inclusion–exclusion errors, the mid-prime ceilings and the full-class ceilings: 226 per class across at most 348 classes, plus 10 for the pair bounds, so $c_0\le 78{,}658$.
 - **Pivots.** At most 4 pivots are used in any case (I.4 uses 4; II.b.1 uses 3).
 - **Prime counts.** $\pi$ is bounded by Rosser–Schoenfeld: $\pi(x)<1.25506\,x/\ln x$.
 - **$\rho^*$.** It is computed exactly.
@@ -188,16 +187,18 @@ $$\mathrm{Err}\le c_0+4\big(\pi(Y)+E(2N_i,Y,\rho^*(2N_i))\big)+2\pi(Y_q)+\mathrm
 - Use Robin's bound $\omega(n)\le1.38402\ln n/\ln\ln n$ for $n\ge3$, so that $\rho^*(N)\le4\cdot2^{1.38402\ln N/\ln\ln N}$.
 - The error majorant then has the form
 $$\frac{c_0}{N}+7\cdot1.25506\,\frac{N^{-0.2}}{0.8\ln N}+17\cdot2^{1.38402\ln N/\ln\ln N}\,\big(2N^{-0.8}+N^{-0.6}\big)+10N^{-1/2}.$$
-- **Each term decreases in $N$.** For the third term, $\frac{d}{du}\big[0.9593\,u/\ln u-0.6u\big]<0$ for $u=\ln N\ge 690$.
+- **Each term decreases in $N$.** For the third term, $\frac{d}{du}\big[0.9594\,u/\ln u-0.6u\big]<0$ for $u=\ln N\ge 690$.
 - The majorant is $<10^{-61}$ at $10^{300}$.
 
 **Combined with the grid.** The grid covers $[4.2\cdot10^7,10^{14}]$, so Part A holds for all $N\ge4.2\cdot10^{7}$.
 
-**Audit.** An independent adversarial audit (`audit/`) re-derived Lemmas 1–5 and the case split, and re-implemented the two binding cases (II.a, II.b.2b) from this text. Its values for these cases lie within about 2% of ours, and rigorous.py is always the larger (for example $0.037765N$ against $0.038342N$ for case II.b.2b at $N=42{,}840{,}000$). Brute-force tests found no bound exceeded. It found no fatal issue. Its minor points are addressed:
+**Audit.** An adversarial audit by a separate AI agent (another Claude instance; audit/) re-derived Lemmas 1–5 and the case split, and re-implemented the two binding cases (II.a, II.b.2b) from this text. Its values for these cases lie within about 2% of ours, and rigorous.py is always the larger (for example $0.037765N$ against $0.038342N$ for case II.b.2b at $N=42{,}840{,}000$). Brute-force tests found no bound exceeded. It found no fatal issue. Its minor points are addressed:
 - monotonicity has been replaced by the argument above,
 - the knapsack now uses the dual LP bound,
 - a class label was fixed,
 - the tail is now complete.
+
+The fixes it prompted (interval principle, dual LP bound, tail_check2) were made after the audit and were re-checked by later separate review agents, not by the original audit.
 
 ## 7. Part B: all $N\le 2^{32}-1$ by online colouring (Theorem B)
 
@@ -208,9 +209,7 @@ Let $G_N$ be the graph on $V_N$ with $a\sim b$ iff $\mu(ab+1)=0$; then $\omega(G
 
 **Updates.**
 - A new $n\in C_7$ opens a class.
-- Any other new vertex is inserted into an existing class, possibly after a repair. At most one move is needed:
-  - typically a $C_{18}$ element swaps with another class's $C_{18}$ element (needed about 34.5% of the time);
-  - rarely one other vertex is also evicted.
+- Any other new vertex is inserted into an existing class, possibly after a repair. At most two earlier vertices move per insertion: typically a $C_{18}$ element swaps with another class's $C_{18}$ element (34.5% of $C_{18}$ insertions); in about 6.4M cases one further vertex also moves (repair depth 1).
 - No static colouring can work, because the nested property already fails at $n=43$. Hence the colouring must be updated online.
 
 **Certification.** Squarefreeness of $m=uv+1<2^{64}$ is certified as follows:
@@ -222,7 +221,7 @@ Uncertain cases are treated as edges, which is sound. No uncertain case occurred
 **Results** (`verifier/`, 10 threads):
 - The invariant held at every $N\le 2^{32}-1=4{,}294{,}967{,}295$, with $|V|=451{,}653{,}474$ and $578{,}428{,}609$ certified pairs.
 - The maximum repair depth was 1.
-- Wall time was about 0.4 h to $10^9$ and about 0.4 h more to $2^{32}-1$.
+- `colour` took 450 s to reach $10^9$ and a further 1,327 s (resumed from a checkpoint) to reach $2^{32}-1$, about 30 min in all; the independent replay and dump check took about 70 min.
 
 **Independent checks.**
 - A separate program (`checker.c`) replayed the complete operation log from $n=1$. It re-certified every new same-class pair (536,466,170 pair checks) using a squarefree routine that shares no code with the main program, and dump checks were run at $4.2\cdot10^7$, $10^8$, $10^9$ and $2^{32}-1$.
@@ -239,7 +238,7 @@ Uncertain cases are treated as edges, which is sound. No uncertain case occurred
 - Sawhney (2025; acknowledging M. Sellke, with assistance from ChatGPT 5 Pro): proof for all large $N$.
 - Sothanaphan + GPT‑5.4 (Mar 2026): explicit $N_0=2.64\cdot10^{17}$.
 - Two unrefereed full-resolution claims (Jul/Aug 2026):
-  - A. C. Li (with OpenAI ChatGPT 5.5 and ChatGPT 5.6 and a personally developed AI-assisted proof-engineering system): Lean 4 proof; colourings for $N\le5\cdot10^6$, interval-wise checks from $5\cdot10^6$, uniform argument from $5\cdot10^{11}$.
+  - A. C. Li (with OpenAI ChatGPT 5.5 and ChatGPT 5.6 and a personally developed AI-assisted research and proof-engineering system): Lean 4 proof; colourings for $N\le5\cdot10^6$, interval-wise checks from $5\cdot10^6$, uniform argument from $5\cdot10^{11}$.
   - I. Pitchford / OpenAI Codex: certificate chain up to $2.64\cdot10^{17}$.
 
-For comparison, our interval checks cover $[4.2\cdot10^7,1.14\cdot10^{14}]$ and our uniform argument covers $N\ge10^{14}$, so Li's thresholds are lower on both counts. This argument does not use the results, code or certificates of Li or Pitchford. Both claims were found during the literature search for this work, and their public write-ups were read for comparison and attribution. Its aim is a short, checkable proof whose finite part runs on a laptop. It is not a priority claim.
+For comparison, our interval checks cover $[4.2\cdot10^7,1.14\cdot10^{14}]$ and our uniform argument covers $N\ge10^{14}$, so Li's thresholds are lower on both counts. The aim here is an independent, checkable verification whose finite part runs on a laptop. We became aware of both claims during this work, after the approach of Part A had been designed; we then read their public write-ups (including their explicit switching and Pell lemmas) for comparison and attribution. All lemmas here are proved in full, and no result, code or certificate of theirs is used. This is not a priority claim.

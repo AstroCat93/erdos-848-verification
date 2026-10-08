@@ -8,8 +8,9 @@ instance told to look for errors). It does not replace human review.
 ## Findings
 
 - No fatal issue was found. The audit re-derived Lemmas 1–5 and the case split from the text of the proof.
-  It also re-implemented the bounds independently (`indep.py`). The proof reports that the two implementations
-  agree to 3–4 digits and that `rigorous.py` always gives the larger bound. For example, at N = 42,840,000
+  It also re-implemented the bounds of the two binding cases (II.a, II.b.2b) independently (`indep.py`). The
+  proof reports that the two implementations agree to within about 2% and that `rigorous.py` always gives the
+  larger bound. For example, at N = 42,840,000
   `indep.py` gives 0.037765·N for case II.b.2b and `rigorous.py` gives 0.038342·N; the target is 0.04·N.
 - Brute-force tests found no bound exceeded (`brute_piv.c` + `cmp_brute.py`, `lemma5_test.py`, `rho_check.py`).
 - These minor issues were raised and fixed in the current proof and code:
@@ -20,6 +21,9 @@ instance told to look for errors). It does not replace human review.
   3. **Class label.** One mislabelled class was corrected.
   4. **Tail.** The tail argument was incomplete. It is now completed by `tail_check2`, which uses a doubling
      grid from 1e14 to 1e300 and a closed-form majorant beyond that. The v1 `tail_check` is superseded.
+
+  These fixes were made after the audit and were re-checked by later separate review agents (also Claude
+  instances), not by the original audit.
 
 ## Files
 

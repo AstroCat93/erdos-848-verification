@@ -4,7 +4,7 @@ This repository is dual-licensed by content type.
 
 MIT License
 
-Copyright (c) 2026 [AUTHOR NAME]
+Copyright (c) 2026 Nathan Durfee
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,5 +26,5 @@ SOFTWARE.
 
 2. Documentation and data -- README.md, proof/, notes/, audit/README.md, and the run logs and data files
    (*.md, *.txt, *.log, *.time, *.bin) -- are licensed under the Creative Commons Attribution 4.0
-   International License (CC BY 4.0), Copyright (c) 2026 [AUTHOR NAME].
+   International License (CC BY 4.0), Copyright (c) 2026 Nathan Durfee.
    Full text: https://creativecommons.org/licenses/by/4.0/legalcode

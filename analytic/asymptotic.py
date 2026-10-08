@@ -144,7 +144,7 @@ def tail_check(NB=10**14, n_pivots=4, c0=10**6, slack=2.0):
 
 
 # ------------------------------------------------------------------------------------------------
-# Rigorous tail, version 2 (replaces tail_check).  For N in [Ni, Ni*10], fix Y = Yq = ceil(Ni^theta).
+# Rigorous tail, version 2 (replaces tail_check).  For N in [Ni, Ni*ratio] (certified call: ratio=2), fix Y = Yq = ceil(Ni^theta).
 # UB_case(N) <= D_case*N + Err with
 #   Err <= c0 + npiv*(pi(Y) + E(N_hi, Y, rho*(N_hi))) + 2*pi(Yq) + Pell(N_hi, Yq)   (each term nondecreasing in N),
 # so UB_case(N)/N <= D_case + Err/Ni.  Need < 1/25 - 6/(25 Ni) + 1/Ni  (we use 1/25 - 1/Ni).
@@ -183,7 +183,9 @@ def tail_check2(NB=10**14, NTOP=10**300, theta=0.8, npiv=4, ratio=2):
             return dict(ok=False, at=Ni, val=val)
         Ni = Nh
     # beyond NTOP: Robin bound rho <= 4*2^{1.38402 ln N/lnln N}; majorant decreasing (checked analytically in notes)
+    # The coefficient of 2^om is 4*npiv + 1 = 17 (the constant in proof.md Section 6 and main.tex); the +1
+    # absorbs the factors (N+1)/N and (N^2+1)/N^2 in E*(N, Y)/N.  (Earlier versions used npiv*4 = 16.)
     lnN = math.log(NTOP); om = 1.38402 * lnN / math.log(lnN)
     tail_val = Dmax + (c0 * 1.0) / 1e300 + 7 * 1.25506 * (1e300) ** (theta - 1) / (theta * lnN) \
-               + npiv * 4 * 2 ** om * (2 * 1e300 ** (-theta) + 1e300 ** (1 - 2 * theta)) + 10 * 1e300 ** (-0.5)
+               + (4 * npiv + 1) * 2 ** om * (2 * 1e300 ** (-theta) + 1e300 ** (1 - 2 * theta)) + 10 * 1e300 ** (-0.5)
     return dict(ok=True, Dmax=Dmax, worst_case=max(D, key=D.get), c0=c0, worst_val_in_grid=worst, beyond_NTOP=tail_val)
