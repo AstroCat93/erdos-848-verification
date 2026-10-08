@@ -13,7 +13,7 @@ Equality holds for $A=\{n\le N: n\equiv7 \pmod{25}\}$, since $7\cdot 7+1=50$ and
 
 **Structure of the proof.**
 - Part A (analytic, Sections 1–6): the theorem holds for every $N\ge N_1:=4.2\cdot10^{7}$. The numerical inequalities are checked by exact rational arithmetic on a finite grid of intervals covering $[4.2\cdot10^7,1.14\cdot10^{14}]$ (Section 5), plus a uniform tail argument for $N\ge10^{14}$ (Section 6: explicit error bounds evaluated on a doubling grid up to $10^{300}$, in floating point with a 1% safety factor, and a closed form beyond).
-- Part B (computational, Section 7): the theorem holds for every $N\le N_1$, certified by an online proper colouring.
+- Part B (computational, Section 7): the theorem holds for every $N\le 2^{32}-1$ (in particular every $N\le N_1$), certified by an online proper colouring.
 
 Sawhney (2025; acknowledging M. Sellke, with assistance from ChatGPT 5 Pro) proved the theorem for all sufficiently large $N$. Part A follows his case split. The tools it adds are standard, and several appear in earlier explicit work:
 1. **Switching.** Large prime squares are counted through the cofactor ($ab+1=mp^2$ with $m$ small), not one prime at a time. This replaces an error of size $\pi(N)$ by about $2^{\omega(b)}N^{2/3}$. The device is classical (Estermann, Hooley, Heath-Brown) and is used in explicit form by Sothanaphan, Li and Pitchford.
@@ -209,7 +209,7 @@ Let $G_N$ be the graph on $V_N$ with $a\sim b$ iff $\mu(ab+1)=0$; then $\omega(G
 
 **Updates.**
 - A new $n\in C_7$ opens a class.
-- Any other new vertex is inserted into an existing class, possibly after a repair. At most two earlier vertices move per insertion: typically a $C_{18}$ element swaps with another class's $C_{18}$ element (34.5% of $C_{18}$ insertions); in about 6.4M cases one further vertex also moves (repair depth 1).
+- Any other new vertex is inserted into an existing class, possibly after a repair. At most two earlier vertices move per insertion: typically a $C_{18}$ element swaps with another class's $C_{18}$ element (34.5% of $C_{18}$ insertions); in about 6.4M cases one further vertex also moves. Every repair was found at search depth 1.
 - No static colouring can work, because the nested property already fails at $n=43$. Hence the colouring must be updated online.
 
 **Certification.** Squarefreeness of $m=uv+1<2^{64}$ is certified as follows:
@@ -219,14 +219,14 @@ Let $G_N$ be the graph on $V_N$ with $a\sim b$ iff $\mu(ab+1)=0$; then $\omega(G
 Uncertain cases are treated as edges, which is sound. No uncertain case occurred.
 
 **Results** (`verifier/`, 10 threads):
-- The invariant held at every $N\le 2^{32}-1=4{,}294{,}967{,}295$, with $|V|=451{,}653{,}474$ and $578{,}428{,}609$ certified pairs.
+- The invariant held at every $N\le 2^{32}-1=4{,}294{,}967{,}295$, with $|V|=451{,}653{,}474$; `colour` computed $578{,}428{,}609$ squarefreeness certificates (0 uncertain).
 - The maximum repair depth was 1.
 - `colour` took 450 s to reach $10^9$ and a further 1,327 s (resumed from a checkpoint) to reach $2^{32}-1$, about 30 min in all; the independent replay and dump check took about 70 min.
 
 **Independent checks.**
 - A separate program (`checker.c`) replayed the complete operation log from $n=1$. It re-certified every new same-class pair (536,466,170 pair checks) using a squarefree routine that shares no code with the main program, and dump checks were run at $4.2\cdot10^7$, $10^8$, $10^9$ and $2^{32}-1$.
 - Two independently written sieves for $V$ agree up to $2^{32}-1$, and direct tests of $n^2+1$ for $n\le10^8$ also agree.
-- Exact max-clique computations agree for $N\le 3\cdot10^5$, as does a colouring check against an edge-sieve graph that uses no squarefree test.
+- An exact clique-number induction confirms $\omega(G_N)\le t(N)$ for all $N\le3\cdot10^5$ without any colouring, and a colouring check against an edge-sieve graph (no squarefree test) agrees for $N\le3\cdot10^5$.
 - Certifier unit tests: about $18.5$M random and adversarial inputs plus exhaustive ranges, with 0 failures.
 - Negative controls: a planted bad pair and a truncated log are both rejected.
 

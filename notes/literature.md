@@ -73,7 +73,8 @@ Files (downloaded via drive uc?export=download): 2.64e17 = 1ujhm4_WYpgRV_rd1rJXI
 - E1(N) at L=1420, T=697: 1.5159e-5 + 1.40945e-3 (2π(N)/N, Dusart) + 7.04729e-4 (2π(N;4,1)/N, BMOR) + ... < 0.00212934 vs δ 0.00212977. The cost is the "+1 per prime" boundary term π(N)/N ~ 1/log N; exp(1185) fails (Ẽ = 0.00255273).
 - Prime bounds used: Dusart [Ramanujan J. 45 (2018) 227–251, Eq. (5.4)] as quoted: π(x) ≤ x/log x (1 + 1/log x + 2.53816/log^2 x) "for all x ≥ 88789" (I could not verify the constant/range independently); BMOR 2018 Thm 1.3 with constant 1/160 for x ≥ 8e9 (note: for 3 ≤ q ≤ 10^4 the paper's c0(q) is actually 1/840; 1/160 is the q > 10^4 value — weaker but valid).
 
-## 3. Citable explicit inputs
+## 3. Explicit versions in the literature (for comparison and attribution)
+*Note added 2026-10-07: this file was compiled by a literature-search agent while the analytic argument was being developed. The approach of Part A (switching for large primes, pivots sieving the leftover elements, the mod-100 pairing) had already been designed and implemented before this report was received; the items below were collected for comparison and attribution. The proofs in proof/proof.md are self-contained and use none of these results.*
 (a) ab+1 / bn+1 in AP with p^2 | bn+1, p > Y, uniform in b:
 - No peer-reviewed explicit version found. Non-explicit: Prachar, Monatsh. Math. 62 (1958) 173–176; Hooley, Bull. LMS 7 (1975) 133–138; Nunes, Mathematika 63 (2017) 483–498 (arXiv:1605.03347).
 - Explicit (AI-generated/unrefereed) forms:

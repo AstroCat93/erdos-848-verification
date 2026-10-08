@@ -34,7 +34,7 @@ The proof (`proof/proof.md`) has two parts that overlap by a factor of about 100
 The analytic part starts at N₁ = 4.2·10⁷: exact-rational interval checks cover [4.2·10⁷, 1.14·10¹⁴] and a
 uniform argument covers N ≥ 10¹⁴ (explicit error bounds on a doubling grid up to 10³⁰⁰, evaluated in floating
 point with a 1% safety factor, and a closed form beyond). (For comparison, Li's interval-wise checks start at
-5·10⁶ and his uniform argument at 5·10¹¹; see the table in the paper.) Because N₁ is small, the finite part
+5·10⁶ and the uniform argument at 5·10¹¹; see proof §8 and [Prior work](#prior-work-and-credit).) Because N₁ is small, the finite part
 fits on a laptop. All N ≤ 10⁸, which already exceeds N₁, take under half a minute including the independent
 replay. All N ≤ 2³² − 1 take about 30 min of colouring plus about 70 min of independent checking.
 
@@ -222,7 +222,8 @@ and covered 433,903,423 same-class pairs.
 Over the whole run, `colour` computed 578,428,609 squarefree certificates: 576,183,405 squarefree,
 2,245,204 not squarefree, and **0 uncertain**. A C18 insertion needed a repair 34.5% of the time, typically a
 swap: the new vertex displaces another class's C18 element, which moves to the class that has none. At most two
-earlier vertices moved per insertion: in about 6.4 M cases one further vertex also moved (repair depth 1).
+earlier vertices moved per insertion: in about 6.4 M cases one further vertex also moved. Every repair was found
+at search depth 1.
 No placement ever failed, and the maximum class size was 8.
 
 Further checks recorded in the logs:
